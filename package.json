@@ -1,0 +1,15 @@
+{
+  "name": "erp-ecosystem",
+  "version": "0.1.0",
+  "description": "Modern modular Enterprise Resource Planning platform",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install && cd apps/api && npm install && cd ../web && npm install",
+    "dev:api": "cd apps/api && npm run dev",
+    "dev:web": "cd apps/web && npm run dev",
+    "build": "cd apps/api && npm run build && cd ../web && npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

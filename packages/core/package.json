@@ -1,0 +1,21 @@
+{
+  "name": "@erp/core",
+  "version": "0.1.0",
+  "description": "Core ERP utilities and services",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "bcrypt": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.2.0"
+  }
+}
