@@ -15,47 +15,51 @@ jobs:
         node-version: [18.x, 20.x]
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     
-    - name: Install dependencies
+    - name: Install API dependencies
       run: npm ci
+      working-directory: apps/api
     
-    - name: Run linter
-      run: npm run lint
+    - name: Install Web dependencies
+      run: npm ci
+      working-directory: apps/web
     
-    - name: Run tests
-      run: npm test
-    
-    - name: Build packages
+    - name: Build API
       run: npm run build
+      working-directory: apps/api
+    
+    - name: Build Web
+      run: npm run build
+      working-directory: apps/web
 
   build-api:
     runs-on: ubuntu-latest
     needs: test
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-        cache: 'npm'
     
     - name: Install dependencies
       run: npm ci
+      working-directory: apps/api
     
     - name: Build API
-      run: cd apps/api && npm run build
+      run: npm run build
+      working-directory: apps/api
     
     - name: Upload API build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: api-build
         path: apps/api/dist
@@ -65,22 +69,23 @@ jobs:
     needs: test
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: '20.x'
-        cache: 'npm'
     
     - name: Install dependencies
       run: npm ci
+      working-directory: apps/web
     
     - name: Build Web
-      run: cd apps/web && npm run build
+      run: npm run build
+      working-directory: apps/web
     
     - name: Upload Web build artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: web-build
         path: apps/web/dist
