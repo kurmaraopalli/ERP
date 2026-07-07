@@ -52,6 +52,43 @@ const Login = ({ onLogin }: LoginProps) => {
     }
   };
 
+  const handleBypass = async () => {
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: 'admin', password: 'admin123' }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+
+      // Store token and user info
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      
+      // Update auth state in App component
+      onLogin();
+      navigate('/');
+    } catch (err: any) {
+      if (err.message === 'Failed to fetch') {
+        setError('Unable to connect to the server. Make sure the API is running on port 3000.');
+      } else {
+        setError(err.message || 'Login failed');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
@@ -112,13 +149,21 @@ const Login = ({ onLogin }: LoginProps) => {
             </div>
           </div>
 
-          <div>
+          <div className="flex flex-col space-y-3">
             <button
               type="submit"
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+            <button
+              type="button"
+              onClick={handleBypass}
+              disabled={loading}
+              className="group relative w-full flex justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Bypass Login (Auto-login admin)
             </button>
           </div>
 
