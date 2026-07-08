@@ -1,11 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Layout as LayoutIcon, DollarSign, Package, ShoppingCart, Users, Building2, Home, LogOut } from 'lucide-react';
+import { Layout as LayoutIcon, DollarSign, Package, ShoppingCart, Users, Building2, Home } from 'lucide-react';
 
-interface LayoutProps {
-  onLogout: () => void;
-}
-
-const Layout = ({ onLogout }: LayoutProps) => {
+const Layout = () => {
   const location = useLocation();
 
   const navItems = [
@@ -47,16 +43,6 @@ const Layout = ({ onLogout }: LayoutProps) => {
                   );
                 })}
               </div>
-            </div>
-            <div className="flex items-center">
-              <button
-                onClick={onLogout}
-                className="flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-700 transition-colors"
-                title="Sign out"
-              >
-                <LogOut className="h-4 w-4 mr-2" />
-                Sign out
-              </button>
             </div>
           </div>
         </div>
