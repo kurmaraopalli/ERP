@@ -10,16 +10,16 @@ import HRModule from './pages/HR';
 function App() {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/finance" element={<FinanceModule />} />
-          <Route path="/inventory" element={<InventoryModule />} />
-          <Route path="/sales" element={<SalesModule />} />
-          <Route path="/procurement" element={<ProcurementModule />} />
-          <Route path="/hr" element={<HRModule />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="finance" element={<FinanceModule />} />
+          <Route path="inventory" element={<InventoryModule />} />
+          <Route path="sales" element={<SalesModule />} />
+          <Route path="procurement" element={<ProcurementModule />} />
+          <Route path="hr" element={<HRModule />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }

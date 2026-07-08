@@ -1,0 +1,12 @@
+{
+  "id": "admin",
+  "username": "admin",
+  "email": "admin@erp.local",
+  "password": "$2b$10$bsx29vgd7Ni.eXvP89fioevDU5htALD/bBxOBFeIe.SCJrRFqY7yy",
+  "roles": [
+    "admin"
+  ],
+  "isActive": true,
+  "createdAt": "2026-07-08T01:40:58.759Z",
+  "updatedAt": "2026-07-08T01:40:58.759Z"
+}
